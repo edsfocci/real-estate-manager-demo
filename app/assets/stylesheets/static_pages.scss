@@ -4,7 +4,22 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.center {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.jumbotron {
+  margin-top: 50px;
+  width: 800px;
+}
+
 .tab-pane {
   padding: 15px;
   background-color: white;
+}
+
+#sell > h1 {
+  font-size: 30px;
 }

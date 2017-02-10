@@ -21,10 +21,79 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="subscribe">
-      Subscribe!
+      <form action="#" method="post">
+        <label for="plan_number">Plan</label>
+        <select id="plan_number">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+
+        <br />
+        <input type="submit" class="btn btn-primary" value="Submit" />
+      </form>
     </div>
-    <div role="tabpanel" class="tab-pane" id="property">Property!</div>
-    <div role="tabpanel" class="tab-pane" id="sell">Sell!</div>
-    <div role="tabpanel" class="tab-pane" id="properties">Properties!</div>
+
+    <div role="tabpanel" class="tab-pane" id="property">
+      <form action="#" method="post">
+        <label for="state">State</label>
+        <select id="state">
+          <option value="dallas">Dallas</option>
+          <option value="austin">Austin</option>
+          <option value="houston">Houston</option>
+        </select>
+
+        <br />
+        <label for="address">Address</label>
+        <input type="text" />
+
+        <br />
+        <label for="roof_type">Roof type</label>
+        <input type="text" />
+
+        <br />
+        <label for="bedrooms">Bedrooms</label>
+        <input type="text" />
+
+        <br />
+        <label for="bathrooms">Bathrooms</label>
+        <input type="text" />
+
+        <br />
+        <input type="submit" class="btn btn-primary" value="Submit" />
+      </form>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="sell">
+      <h1>123 Main Street Dallas Texas</h1>
+
+      <div><span id="percent_complete">75</span>% Complete</div>
+
+      <div>Missing Fields:</div>
+      <div>
+        <ul>
+          <li>Roof Type</li>
+        </ul>
+      </div>
+
+      <form action="#" method="post">
+        <input type="submit" class="btn btn-primary" value="Sell House" />
+      </form>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="properties">
+      <div>
+        <span class="property_address">123 Main Street Dallas Texas</span>
+        <span class="property_status">For Sale</span>
+      </div>
+      <div>
+        <span class="property_address">234 Far Gallant Austin Texas</span>
+        <span class="property_status">Pending</span>
+      </div>
+      <div>
+        <span class="property_address">333 Sample Address Houston Texas</span>
+        <span class="property_status">Pending</span>
+      </div>
+    </div>
   </div>
 </div>

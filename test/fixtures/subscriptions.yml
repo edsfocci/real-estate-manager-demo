@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plan_number: 1
+  user: one
+
+two:
+  plan_number: 1
+  user: two

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    User.delete_all
+    User.destroy_all
     @user = User.new(username: 'Test User')
   end
 

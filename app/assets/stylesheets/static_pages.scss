@@ -49,7 +49,7 @@ form {
 }
 
 #property {
-  form {
+  #property-form {
     width:            355px;
 
     label {
@@ -72,8 +72,8 @@ form {
       }
 
       input {
-        position:       relative;
-        top:            1px;
+        position:     relative;
+        top:          1px;
       }
 
       input:nth-child(2) {
@@ -82,6 +82,7 @@ form {
     }
 
     #new-property {
+      display:        none;
       position:       relative;
       top:            7px;
     }
@@ -100,19 +101,30 @@ form {
 #sell {
   padding-left:       50px;
 
+  #property-not-selected {
+    margin-top:       20px;
+  }
+
+  #property-info {
+    display:          none;
+  }
+
   h1 {
     font-size:        30px;
   }
 
   h1,
-  div:nth-child(2),
-  div:nth-child(4) {
+  #percent-div {
     margin-bottom:    15px;
   }
 
-  ul {
+  #missing-fields ul {
     padding-left:     25px;
     list-style:       none;
+  }
+
+  #sell-form {
+    margin-top:       25px;
   }
 }
 

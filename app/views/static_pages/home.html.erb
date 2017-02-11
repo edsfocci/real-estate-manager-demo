@@ -21,7 +21,7 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="subscribe">
-      <form action="#" method="post" class="center">
+      <form id="subscribe-form" action="#" method="post" class="center">
         <div class="form-group">
           <label for="plan_number">Plan</label>
           <select id="plan_number" name="subscription[plan_number]">
@@ -36,7 +36,7 @@
     </div>
 
     <div role="tabpanel" class="tab-pane" id="property">
-      <form action="#" method="post" class="center">
+      <form id="property-form" action="#" method="post" class="center">
         <div class="form-group">
           <label for="state">State</label>
           <select id="state" name="property[state]">
@@ -131,44 +131,34 @@
     </div>
 
     <div role="tabpanel" class="tab-pane" id="sell">
-      <h1>123 Main Street Dallas Texas</h1>
-
-      <div><span id="percent_complete">75</span>% Complete</div>
-
-      <div>Missing Fields:</div>
-      <div>
-        <ul>
-          <li>- Roof Type</li>
-        </ul>
+      <div id="property-not-selected">
+        Please select a property from the "Properties" tab.
       </div>
 
-      <form action="#" method="post">
-        <input type="submit" class="btn btn-primary" value="Sell House" />
-      </form>
+      <div id="property-info">
+        <h1></h1>
+
+        <div id="percent-div">
+          <span id="percent_complete"></span>% Complete
+        </div>
+
+        <div id="missing-fields">
+          <div>Missing Fields:</div>
+          <ul></ul>
+        </div>
+
+        <form id="sell-form" action="#" method="post">
+          <input type="submit" class="btn btn-primary" value="Sell House" />
+        </form>
+      </div>
     </div>
 
     <div role="tabpanel" class="tab-pane" id="properties">
-      <div id="properties-list" class="center">
-        <div>
-          <a href="#">
-            <span class="property_address">123 Main Street Dallas Texas</span>
-            <span class="property_status">For Sale</span>
-          </a>
-        </div>
-        <div>
-          <a href="#">
-            <span class="property_address">234 Far Gallant Austin Texas</span>
-            <span class="property_status">Pending</span>
-          </a>
-        </div>
-        <div>
-          <a href="#">
-            <span class="property_address">333 Sample Address Houston Texas
-            </span>
-            <span class="property_status">Pending</span>
-          </a>
-        </div>
-      </div>
+      <div id="properties-list" class="center"></div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  window.user = JSON.parse('<%= raw current_user.to_json %>');
+</script>

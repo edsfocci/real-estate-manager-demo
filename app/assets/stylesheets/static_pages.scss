@@ -4,22 +4,128 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body,
+.btn {
+  font-size:          18px;
+}
+
+a:hover {
+  text-decoration:    none;
+}
+
+form {
+  display:            inline-block;
+}
+
 .center {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  position:           relative;
+  left:               50%;
+  transform:          translateX(-50%);
 }
 
 .jumbotron {
-  margin-top: 50px;
-  width: 800px;
+  margin-top:         75px;
+  width:              800px;
 }
 
 .tab-pane {
-  padding: 15px;
-  background-color: white;
+  position:           relative;
+  padding:            15px 0;
+  min-height:         325px;
+  background-color:   white;
 }
 
-#sell > h1 {
-  font-size: 30px;
+#subscribe {
+  padding-top:        50px;
+
+  #plan_number {
+    width:            200px;
+    margin-left:      10px;
+  }
+
+  .btn {
+    width:            100%;
+  }
+}
+
+#property {
+  form {
+    width:            355px;
+
+    label {
+      margin-top:     5px;
+    }
+
+    input[type=text],
+    input[type=number] {
+      float:          right;
+      width:          250px;
+    }
+
+    .radio-group {
+      display:        inline-block;
+      float:          right;
+      width:          250px;
+
+      span {
+        display:      inline-block;
+      }
+
+      input {
+        position:       relative;
+        top:            1px;
+      }
+
+      input:nth-child(2) {
+        margin-left:  30px;
+      }
+    }
+
+    #new-property {
+      position:       relative;
+      top:            7px;
+    }
+
+    .btn {
+      float:          right;
+    }
+  }
+
+  .state-all,
+  .state-dependent {
+    display:          none;
+  }
+}
+
+#sell {
+  padding-left:       50px;
+
+  h1 {
+    font-size:        30px;
+  }
+
+  h1,
+  div:nth-child(2),
+  div:nth-child(4) {
+    margin-bottom:    15px;
+  }
+
+  ul {
+    padding-left:     25px;
+    list-style:       none;
+  }
+}
+
+#properties {
+  #properties-list {
+    margin-top:       25px;
+    padding:          15px;
+    width:            500px;
+    border:           1px solid black;
+
+    .property_status {
+      float:          right;
+      width:          100px;
+    }
+  }
 }

@@ -20,6 +20,7 @@
 
   <!-- Tab panes -->
   <div class="tab-content">
+    <!-- Subscribe tab pane -->
     <div role="tabpanel" class="tab-pane active" id="subscribe">
       <form id="subscribe-form" action="#" method="post" class="center">
         <div class="form-group">
@@ -35,6 +36,8 @@
       </form>
     </div>
 
+
+    <!-- Property tab pane -->
     <div role="tabpanel" class="tab-pane" id="property">
       <form id="property-form" action="#" method="post" class="center">
         <div class="form-group">
@@ -59,6 +62,7 @@
           </div>
         </div>
 
+        <!-- Dallas-specific form fields -->
         <div id="state-dallas" class="state-dependent">
           <div class="form-group">
             <label for="bedrooms">Bedrooms</label>
@@ -71,6 +75,7 @@
           </div>
         </div>
 
+        <!-- Austin-specific form fields -->
         <div id="state-austin" class="state-dependent">
           <div class="form-group">
             <label for="dining_area">Dining Area</label>
@@ -99,6 +104,7 @@
           </div>
         </div>
 
+        <!-- Houston-specific form fields -->
         <div id="state-houston" class="state-dependent">
           <div class="form-group">
             <label for="pool">Pool</label>
@@ -130,6 +136,8 @@
       </form>
     </div>
 
+
+    <!-- Sell tab pane -->
     <div role="tabpanel" class="tab-pane" id="sell">
       <div id="property-not-selected">
         Please select a property from the "Properties" tab.
@@ -155,6 +163,8 @@
       </div>
     </div>
 
+
+    <!-- Properties tab pane -->
     <div role="tabpanel" class="tab-pane" id="properties">
       <div id="properties-list" class="center"></div>
     </div>

@@ -23,6 +23,13 @@ form {
   transform:          translateX(-50%);
 }
 
+.alert {
+  display:            none;
+  position:           absolute;
+  width:              800px;
+  top:                8px;
+}
+
 .jumbotron {
   margin-top:         75px;
   width:              800px;
@@ -44,8 +51,7 @@ form {
   }
 
   .popover {
-    // display: inline-block;
-    width: 215px;
+    width:            215px;
   }
 
   .btn {

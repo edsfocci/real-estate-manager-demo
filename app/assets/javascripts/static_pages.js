@@ -2,6 +2,7 @@
 
 
 $(function() {
+  var $alertMessage       = $('.alert');
   var $planNumber         = $('#plan_number');
   var $propertyForm       = $('#property-form');
   var $stateInput         = $('#state');
@@ -50,6 +51,8 @@ $(function() {
     .done(function(data) {
       subscription.plan_number = data.plan_number;
       updateSellPane(propertiesDict[$sellPropertyId.val()]);
+
+      triggerAlert('Subscription updated.');
     });
   });
 
@@ -104,9 +107,14 @@ $(function() {
         'data':   propertyData
       });
     else
-      promise = $.post('/properties/', property);
+      promise = $.post('/properties/', propertyData);
 
     promise.done(function(data) {
+      if (propertiesDict[data._id.$oid])
+        triggerAlert('Property updated.');
+      else
+        triggerAlert('Property added.');
+
       updateProperty(data);
       updateSellPane(data);
     });
@@ -134,6 +142,11 @@ $(function() {
       'data':   propertyData
     })
     .done(function(data) {
+      if (data.for_sale)
+        triggerAlert('Property is now for sale.');
+      else
+        triggerAlert('Property is no longer for sale.');
+
       updateProperty(data);
       updateSellPane(data);
     });
@@ -148,13 +161,16 @@ $(function() {
     'html':     true
   });
 
-  // $sellFormSubmit.popover({
-  //   'content':  '1 = can sell only 1 property<br />' +
-  //               '2 = can sell only 2 properties<br />' +
-  //               '3 = can sell only 3 properties',
-  //   'trigger':  'hover',
-  //   'html':     true
-  // });
+  /* Helper functions: alerts */
+  function triggerAlert(message) {
+    $alertMessage.html(message);
+
+    $alertMessage.fadeIn();
+
+    setTimeout(function() {
+      $alertMessage.fadeOut();
+    }, 3000);
+  }
 
   /* Helper functions: tab-pane-specific */
   function updateStateForm() {
@@ -181,53 +197,81 @@ $(function() {
   }
 
   function updateSellPane(property) {
-    var $missingFields      = $('#missing-fields');
-    var $missingFieldsUl    = $('#missing-fields ul');
+    function updateFunction() {
+      var $missingFields      = $('#missing-fields');
+      var $missingFieldsUl    = $('#missing-fields ul');
 
-    var propertyFields      = propertyFieldsDict[property.state];
-    var missingFieldsCount  = 0;
+      var propertyFields      = propertyFieldsDict[property.state];
+      var missingFieldsCount  = 0;
+      var sellBtnMessage      = '';
 
-    $missingFieldsUl.empty();
+      $missingFieldsUl.empty();
 
-    for (var i = 0; i < propertyFields.length; i++) {
-      if (property[propertyFields[i]] === null) {
-        $missingFieldsUl.append(
-          $('<li/>').html('- ' + stringHumanReadable(propertyFields[i])));
-        missingFieldsCount++;
-      } else if (typeof property[propertyFields[i]] === 'string') {
-        if (!property[propertyFields[i]].trim()) {
+      for (var i = 0; i < propertyFields.length; i++) {
+        if (property[propertyFields[i]] === null) {
           $missingFieldsUl.append(
             $('<li/>').html('- ' + stringHumanReadable(propertyFields[i])));
           missingFieldsCount++;
+        } else if (typeof property[propertyFields[i]] === 'string') {
+          if (!property[propertyFields[i]].trim()) {
+            $missingFieldsUl.append(
+              $('<li/>').html('- ' + stringHumanReadable(propertyFields[i])));
+            missingFieldsCount++;
+          }
         }
       }
-    }
 
-    $('#property-not-selected').hide();
-    $('#property-info').show();
-    $missingFields.hide();
+      $('#property-not-selected').hide();
+      $('#property-info').show();
+      $missingFields.hide();
 
-    $('#property-info > h1').html(propertyFullAddress(property));
-    $('#percent_complete').html(100 - (25 * missingFieldsCount));
+      $('#property-info > h1').html(propertyFullAddress(property));
+      $('#percent_complete').html(100 - (25 * missingFieldsCount));
 
-    $sellPropertyId.val(property._id.$oid);
+      $sellPropertyId.val(property._id.$oid);
 
-    if (missingFieldsCount)
-      $missingFields.show();
+      if (missingFieldsCount) {
+        $missingFields.show();
 
-    if (property.for_sale)
-      $sellFormSubmit
-      .val('Unsell House')
-      .removeClass('disabled');
-    else {
-      $sellFormSubmit.val('Sell House');
-
-      if (missingFieldsCount || forSaleCount >= subscription.plan_number) {
-        $sellFormSubmit.addClass('disabled');
+        sellBtnMessage =  '<li>Fill in all missing fields to sell this ' +
+                          'property.</li>';
       }
-      else
-        $sellFormSubmit.removeClass('disabled');
+
+      if (forSaleCount >= subscription.plan_number)
+        sellBtnMessage += '<li>Upgrade your subscription to sell more ' +
+                          'properties.</li>';
+
+      $sellFormSubmit.popover('destroy');
+
+      if (property.for_sale)
+        $sellFormSubmit
+        .val('Unsell House')
+        .removeClass('disabled');
+      else {
+        $sellFormSubmit.val('Sell House');
+
+        if (sellBtnMessage) {
+          $sellFormSubmit.addClass('disabled');
+
+          sellBtnMessage = '<ul>' + sellBtnMessage + '</ul>';
+
+          $sellFormSubmit.popover({
+            'content':  sellBtnMessage,
+            'trigger':  'hover',
+            'html':     true
+          });
+        }
+        else
+          $sellFormSubmit.removeClass('disabled');
+      }
     }
+
+    updateFunction();
+
+    // Workaround to reset $sellFormSubmit.popover()
+    setTimeout(function() {
+      updateFunction();
+    }, 500);
   }
 
   /* Helper function: Property model */
@@ -294,6 +338,8 @@ $(function() {
         .val(selectedProperty._id.$oid));
 
         updateSellPane(selectedProperty);
+
+        triggerAlert('Property selected.');
       });
 
       updateData.$propertyLink = $propertyLink;

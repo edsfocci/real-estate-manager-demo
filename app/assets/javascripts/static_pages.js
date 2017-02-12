@@ -91,6 +91,8 @@ $(function() {
                                                                         .trim();
       else if ($('#' + propertyFields[i]).val())
         propertyData[propertyFields[i]] = $('#' + propertyFields[i]).val();
+      else
+        propertyData[propertyFields[i]] = null;
     }
 
     propertyData.state += 'Property';
@@ -145,6 +147,14 @@ $(function() {
     'trigger':  'hover',
     'html':     true
   });
+
+  // $sellFormSubmit.popover({
+  //   'content':  '1 = can sell only 1 property<br />' +
+  //               '2 = can sell only 2 properties<br />' +
+  //               '3 = can sell only 3 properties',
+  //   'trigger':  'hover',
+  //   'html':     true
+  // });
 
   /* Helper functions: tab-pane-specific */
   function updateStateForm() {
@@ -202,6 +212,9 @@ $(function() {
 
     $sellPropertyId.val(property._id.$oid);
 
+    if (missingFieldsCount)
+      $missingFields.show();
+
     if (property.for_sale)
       $sellFormSubmit
       .val('Unsell House')
@@ -209,13 +222,7 @@ $(function() {
     else {
       $sellFormSubmit.val('Sell House');
 
-      if (forSaleCount >= subscription.plan_number) {
-        $sellFormSubmit.addClass('disabled');
-
-        if (missingFieldsCount)
-          $missingFields.show();
-      } else if (missingFieldsCount) {
-        $missingFields.show();
+      if (missingFieldsCount || forSaleCount >= subscription.plan_number) {
         $sellFormSubmit.addClass('disabled');
       }
       else

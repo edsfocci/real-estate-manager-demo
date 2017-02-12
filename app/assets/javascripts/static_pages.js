@@ -8,6 +8,8 @@ $(function() {
   var $stateDependent     = $('.state-dependent');
   var $newPropertyBtn     = $('#new-property');
   var $sellPane           = $('#sell');
+  var $sellPropertyId     = $('#property-id-sell');
+  var $sellFormSubmit     = $('#sell-form input[type=submit]');
   var $propertiesList     = $('#properties-list');
 
   var propertyFieldsDict  = {
@@ -20,11 +22,12 @@ $(function() {
   };
   var textInputs          = ['address', 'roof_type', 'bedrooms', 'bathrooms'];
   var radioInputs         = ['dining_area', 'kitchen', 'pool', 'garage'];
-  var properties          = window.user.subscription.properties;
+  var subscription        = window.user.subscription;
+  var properties          = subscription.properties;
   var propertiesDict      = {};
   var forSaleCount        = 0;
 
-  showStateForm();
+  updateStateForm();
 
   for (var i = 0; i < properties.length; i++)
     updateProperty(properties[i]);
@@ -32,10 +35,25 @@ $(function() {
   // Submit change in subscription's plan_number
   $('#subscribe-form').submit(function(e) {
     e.preventDefault();
+
+    var subscriptionData = {
+      'subscription': {
+        'plan_number': $('#plan_number').val()
+      }
+    };
+
+    $.ajax('/subscriptions/' + subscription._id.$oid, {
+      'method': 'PATCH',
+      'data':   subscriptionData
+    })
+    .done(function(data) {
+      subscription.plan_number = data.plan_number;
+      updateSellPane(propertiesDict[$sellPropertyId.val()]);
+    });
   });
 
   $stateInput.change(function() {
-    showStateForm();
+    updateStateForm();
   });
 
   $newPropertyBtn.click(function(e) {
@@ -52,49 +70,74 @@ $(function() {
   $propertyForm.submit(function(e) {
     e.preventDefault();
 
-    var property        = {
+    var propertyData    = {
       'state': stringHumanReadable($stateInput.val())
     };
-    var propertyFields  = propertyFieldsDict[property.state];
-    var propertyId      = $('#property-id').val();
+    var propertyFields  = propertyFieldsDict[propertyData.state];
+    var propertyId      = $('#property-id-edit').val();
     var promise;
-
-    if (propertyId)
-      property.id = propertyId;
 
     for (var i = 0; i < propertyFields.length; i++) {
       if (propertyFields[i] in radioInputSet) {
         if ($('#yes-' + propertyFields[i]).prop('checked'))
-          property[propertyFields[i]] = true;
+          propertyData[propertyFields[i]] = true;
         else if ($('#no-' + propertyFields[i]).prop('checked'))
-          property[propertyFields[i]] = false;
+          propertyData[propertyFields[i]] = false;
       }
       else if (typeof $('#' + propertyFields[i]).val() === 'string' &&
           $('#' + propertyFields[i]).val().trim())
-        property[propertyFields[i]] = $('#' + propertyFields[i]).val().trim();
+        propertyData[propertyFields[i]] = $('#' + propertyFields[i]).val()
+                                                                        .trim();
       else if ($('#' + propertyFields[i]).val())
-        property[propertyFields[i]] = $('#' + propertyFields[i]).val();
+        propertyData[propertyFields[i]] = $('#' + propertyFields[i]).val();
     }
 
-    property.state += 'Property';
-    property = { 'property': property };
+    propertyData.state += 'Property';
+    propertyData = { 'property': propertyData };
 
-    if (property.property.id)
-      promise = $.ajax('/properties/' + property.property.id, {
+    if (propertyId)
+      promise = $.ajax('/properties/' + propertyId, {
         'method': 'PATCH',
-        'data':   property
+        'data':   propertyData
       });
     else
       promise = $.post('/properties/', property);
 
-    promise.done(updateProperty);
+    promise.done(function(data) {
+      updateProperty(data);
+      updateSellPane(data);
+    });
   });
 
   $('#sell-form').submit(function(e) {
     e.preventDefault();
+
+    var propertyId = $sellPropertyId.val();
+    var propertyData = { 'property': {} };
+
+    if ($sellFormSubmit.val() === 'Sell House') {
+      if ($sellFormSubmit.hasClass('disabled'))
+        return;
+
+      propertyData.property.for_sale = true;
+      forSaleCount++;
+    } else if ($sellFormSubmit.val() === 'Unsell House') {
+      propertyData.property.for_sale = false;
+      forSaleCount--;
+    }
+
+    $.ajax('/properties/' + propertyId, {
+      'method': 'PATCH',
+      'data':   propertyData
+    })
+    .done(function(data) {
+      updateProperty(data);
+      updateSellPane(data);
+    });
   });
 
-  function showStateForm() {
+  /* Helper functions: tab-pane-specific */
+  function updateStateForm() {
     var stateChosen = $stateInput.val();
 
     if (stateChosen) {
@@ -105,10 +148,10 @@ $(function() {
     }
   }
 
-  /* Helper functions: tab-pane-specific */
   function clearPropertyInputs() {
     $stateInput.val(null);
-    $('#property-id').remove();
+    $('#property-id-edit').remove();
+
     for (var i = 0; i < textInputs.length; i++)
       $('#' + textInputs[i]).val(null);
     for (var i = 0; i < radioInputs.length; i++) {
@@ -120,7 +163,6 @@ $(function() {
   function updateSellPane(property) {
     var $missingFields      = $('#missing-fields');
     var $missingFieldsUl    = $('#missing-fields ul');
-    var $sellFormSubmit     = $('#sell-form input');
 
     var propertyFields      = propertyFieldsDict[property.state];
     var missingFieldsCount  = 0;
@@ -148,6 +190,8 @@ $(function() {
     $('#property-info > h1').html(propertyFullAddress(property));
     $('#percent_complete').html(100 - (25 * missingFieldsCount));
 
+    $sellPropertyId.val(property._id.$oid);
+
     if (property.for_sale)
       $sellFormSubmit
       .val('Unsell House')
@@ -155,7 +199,7 @@ $(function() {
     else {
       $sellFormSubmit.val('Sell House');
 
-      if (forSaleCount >= window.user.subscription.plan_number) {
+      if (forSaleCount >= subscription.plan_number) {
         $sellFormSubmit.addClass('disabled');
 
         if (missingFieldsCount)
@@ -226,7 +270,7 @@ $(function() {
         .change();
         $newPropertyBtn.show();
         $propertyForm.append($('<input/>', {
-          id:   'property-id',
+          id:   'property-id-edit',
           type: 'hidden',
           name: 'property[id]'
         })
@@ -253,8 +297,6 @@ $(function() {
       .append($('<div/>')
         .append($propertyLink));
     }
-
-    updateSellPane(updateData);
 
     propertiesDict[updateData._id.$oid] = updateData;
   }

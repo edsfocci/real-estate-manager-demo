@@ -20,6 +20,6 @@ class PropertiesController < ApplicationController
 
     def property_params
       params.require(:property).permit  :address, :roof_type, :bedrooms,
-                              :bathrooms, :dining_area, :kitchen, :pool, :garage
+                  :bathrooms, :dining_area, :kitchen, :pool, :garage, :for_sale
     end
 end

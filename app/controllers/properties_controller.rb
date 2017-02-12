@@ -1,8 +1,4 @@
 class PropertiesController < ApplicationController
-  def show
-    @property = current_user.subscription.properties.find params[:id]
-  end
-
   def create
     property_class = {
       'DallasProperty'  => DallasProperty,

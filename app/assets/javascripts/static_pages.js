@@ -116,7 +116,8 @@ $(function() {
         triggerAlert('Property added.');
 
       updateProperty(data);
-      updateSellPane(data);
+
+      data.$propertyLink.click();
     });
   });
 
@@ -339,7 +340,8 @@ $(function() {
 
         updateSellPane(selectedProperty);
 
-        triggerAlert('Property selected.');
+        if ($alertMessage.css('display') === 'none')
+          triggerAlert('Property selected.');
       });
 
       updateData.$propertyLink = $propertyLink;

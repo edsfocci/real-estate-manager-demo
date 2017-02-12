@@ -2,6 +2,7 @@
 
 
 $(function() {
+  var $planNumber         = $('#plan_number');
   var $propertyForm       = $('#property-form');
   var $stateInput         = $('#state');
   var $stateAll           = $('.state-all');
@@ -38,7 +39,7 @@ $(function() {
 
     var subscriptionData = {
       'subscription': {
-        'plan_number': $('#plan_number').val()
+        'plan_number': $planNumber.val()
       }
     };
 
@@ -134,6 +135,15 @@ $(function() {
       updateProperty(data);
       updateSellPane(data);
     });
+  });
+
+  /* Bootstrap popovers */
+  $planNumber.popover({
+    'content':  '1 = can sell only 1 property<br />' +
+                '2 = can sell only 2 properties<br />' +
+                '3 = can sell only 3 properties',
+    'trigger':  'hover',
+    'html':     true
   });
 
   /* Helper functions: tab-pane-specific */

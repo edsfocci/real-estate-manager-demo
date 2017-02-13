@@ -4,6 +4,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  background-color:   #92A1CF;
+}
+
 body,
 .btn {
   font-size:          18px;
@@ -27,12 +31,16 @@ form {
   display:            none;
   position:           absolute;
   width:              800px;
-  top:                8px;
+  top:                56px;
 }
 
 .jumbotron {
-  margin-top:         75px;
+  margin-top:         120px;
   width:              800px;
+}
+
+#front-page {
+  text-align:         center;
 }
 
 .tab-pane {

@@ -1,178 +1,188 @@
 <div id="dash-alert" class="alert alert-success center" role="alert"></div>
 
 <div class="center jumbotron">
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active">
-      <a href="#subscribe" aria-controls="Subscribe" role="tab"
-      data-toggle="tab">Subscribe</a>
-    </li>
-    <li role="presentation">
-      <a href="#property" aria-controls="Property" role="tab"
-      data-toggle="tab">Property</a>
-    </li>
-    <li role="presentation">
-      <a href="#sell" aria-controls="Sell" role="tab"
-      data-toggle="tab">Sell</a></li>
-    <li role="presentation">
-      <a href="#properties" aria-controls="Properties" role="tab"
-      data-toggle="tab">Properties</a>
-    </li>
-  </ul>
+  <div id="front-page">
+    <h1>
+      Welcome to the<br />
+      Real Estate Manager Demo
+    </h1>
+  </div>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <!-- Subscribe tab pane -->
-    <div role="tabpanel" class="tab-pane active" id="subscribe">
-      <form id="subscribe-form" action="#" method="post" class="center">
-        <div class="form-group">
-          <label for="plan_number">Plan</label>
-          <select id="plan_number" name="subscription[plan_number]">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-        </div>
+  <div id="dashboard">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#subscribe" aria-controls="Subscribe" role="tab"
+        data-toggle="tab">Subscribe</a>
+      </li>
+      <li role="presentation">
+        <a href="#property" aria-controls="Property" role="tab"
+        data-toggle="tab">Property</a>
+      </li>
+      <li role="presentation">
+        <a href="#sell" aria-controls="Sell" role="tab"
+        data-toggle="tab">Sell</a></li>
+      <li role="presentation">
+        <a href="#properties" aria-controls="Properties" role="tab"
+        data-toggle="tab">Properties</a>
+      </li>
+    </ul>
 
-        <input type="submit" class="btn btn-primary" value="Submit" />
-      </form>
-    </div>
-
-
-    <!-- Property tab pane -->
-    <div role="tabpanel" class="tab-pane" id="property">
-      <form id="property-form" action="#" method="post" class="center">
-        <div class="form-group">
-          <label for="state">State</label>
-          <select id="state" name="property[state]">
-            <option selected="selected" disabled="disabled"></option>
-            <option value="dallas">Dallas</option>
-            <option value="austin">Austin</option>
-            <option value="houston">Houston</option>
-          </select>
-        </div>
-
-        <div class="state-all">
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Subscribe tab pane -->
+      <div role="tabpanel" class="tab-pane active" id="subscribe">
+        <form id="subscribe-form" action="#" method="post" class="center">
           <div class="form-group">
-            <label for="address">Address</label>
-            <input id="address" type="text" name="property[address]" />
+            <label for="plan_number">Plan</label>
+            <select id="plan_number" name="subscription[plan_number]">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
           </div>
 
-          <div class="form-group">
-            <label for="roof_type">Roof type</label>
-            <input id="roof_type" type="text" name="property[roof_type]" />
-          </div>
-        </div>
-
-        <!-- Dallas-specific form fields -->
-        <div id="state-dallas" class="state-dependent">
-          <div class="form-group">
-            <label for="bedrooms">Bedrooms</label>
-            <input id="bedrooms" type="number" name="property[bedrooms]" />
-          </div>
-
-          <div class="form-group">
-            <label for="bathrooms">Bathrooms</label>
-            <input id="bathrooms" type="number" name="property[bathrooms]" />
-          </div>
-        </div>
-
-        <!-- Austin-specific form fields -->
-        <div id="state-austin" class="state-dependent">
-          <div class="form-group">
-            <label for="dining_area">Dining Area</label>
-            <span class="radio-group">
-              <span class="center">
-                <input id="no-dining_area" type="radio"
-                name="property[dining_area]" />
-                <label for="no-dining_area">No</label>
-                <input id="yes-dining_area" type="radio"
-                name="property[dining_area]" />
-                <label for="yes-dining_area">Yes</label>
-              </span>
-            </span>
-          </div>
-
-          <div class="form-group">
-            <label for="kitchen">Kitchen</label>
-            <span class="radio-group">
-              <span class="center">
-                <input id="no-kitchen" type="radio" name="property[kitchen]" />
-                <label for="no-kitchen">No</label>
-                <input id="yes-kitchen" type="radio" name="property[kitchen]" />
-                <label for="yes-kitchen">Yes</label>
-              </span>
-            </span>
-          </div>
-        </div>
-
-        <!-- Houston-specific form fields -->
-        <div id="state-houston" class="state-dependent">
-          <div class="form-group">
-            <label for="pool">Pool</label>
-            <span class="radio-group">
-              <span class="center">
-                <input id="no-pool" type="radio" name="property[pool]" />
-                <label for="no-pool">No</label>
-                <input id="yes-pool" type="radio" name="property[pool]" />
-                <label for="yes-pool">Yes</label>
-              </span>
-            </span>
-          </div>
-
-          <div class="form-group">
-            <label for="garage">Garage</label>
-            <span class="radio-group">
-              <span class="center">
-                <input id="no-garage" type="radio" name="property[garage]" />
-                <label for="no-garage">No</label>
-                <input id="yes-garage" type="radio" name="property[garage]" />
-                <label for="yes-garage">Yes</label>
-              </span>
-            </span>
-          </div>
-        </div>
-
-        <a id="new-property" href="#">New property</a>
-        <input type="submit" class="btn btn-primary state-all" value="Submit" />
-      </form>
-    </div>
-
-
-    <!-- Sell tab pane -->
-    <div role="tabpanel" class="tab-pane" id="sell">
-      <div id="property-not-selected">
-        Please select a property from the "Properties" tab.
-      </div>
-
-      <div id="property-info">
-        <h1></h1>
-
-        <div id="percent-div">
-          <span id="percent_complete"></span>% Complete
-        </div>
-
-        <div id="missing-fields">
-          <div>Missing Fields:</div>
-          <ul></ul>
-        </div>
-
-        <form id="sell-form" action="#" method="post">
-          <input id="property-id-sell" type="hidden" name="property[id]" />
-
-          <input type="submit" class="btn btn-primary" value="Sell House" />
+          <input type="submit" class="btn btn-primary" value="Submit" />
         </form>
       </div>
-    </div>
 
 
-    <!-- Properties tab pane -->
-    <div role="tabpanel" class="tab-pane" id="properties">
-      <div id="properties-list" class="center"></div>
+      <!-- Property tab pane -->
+      <div role="tabpanel" class="tab-pane" id="property">
+        <form id="property-form" action="#" method="post" class="center">
+          <div class="form-group">
+            <label for="state">State</label>
+            <select id="state" name="property[state]">
+              <option selected="selected" disabled="disabled"></option>
+              <option value="dallas">Dallas</option>
+              <option value="austin">Austin</option>
+              <option value="houston">Houston</option>
+            </select>
+          </div>
+
+          <div class="state-all">
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input id="address" type="text" name="property[address]" />
+            </div>
+
+            <div class="form-group">
+              <label for="roof_type">Roof type</label>
+              <input id="roof_type" type="text" name="property[roof_type]" />
+            </div>
+          </div>
+
+          <!-- Dallas-specific form fields -->
+          <div id="state-dallas" class="state-dependent">
+            <div class="form-group">
+              <label for="bedrooms">Bedrooms</label>
+              <input id="bedrooms" type="number" name="property[bedrooms]" />
+            </div>
+
+            <div class="form-group">
+              <label for="bathrooms">Bathrooms</label>
+              <input id="bathrooms" type="number" name="property[bathrooms]" />
+            </div>
+          </div>
+
+          <!-- Austin-specific form fields -->
+          <div id="state-austin" class="state-dependent">
+            <div class="form-group">
+              <label for="dining_area">Dining Area</label>
+              <span class="radio-group">
+                <span class="center">
+                  <input id="no-dining_area" type="radio"
+                  name="property[dining_area]" />
+                  <label for="no-dining_area">No</label>
+                  <input id="yes-dining_area" type="radio"
+                  name="property[dining_area]" />
+                  <label for="yes-dining_area">Yes</label>
+                </span>
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="kitchen">Kitchen</label>
+              <span class="radio-group">
+                <span class="center">
+                  <input id="no-kitchen" type="radio" name="property[kitchen]" />
+                  <label for="no-kitchen">No</label>
+                  <input id="yes-kitchen" type="radio" name="property[kitchen]" />
+                  <label for="yes-kitchen">Yes</label>
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Houston-specific form fields -->
+          <div id="state-houston" class="state-dependent">
+            <div class="form-group">
+              <label for="pool">Pool</label>
+              <span class="radio-group">
+                <span class="center">
+                  <input id="no-pool" type="radio" name="property[pool]" />
+                  <label for="no-pool">No</label>
+                  <input id="yes-pool" type="radio" name="property[pool]" />
+                  <label for="yes-pool">Yes</label>
+                </span>
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="garage">Garage</label>
+              <span class="radio-group">
+                <span class="center">
+                  <input id="no-garage" type="radio" name="property[garage]" />
+                  <label for="no-garage">No</label>
+                  <input id="yes-garage" type="radio" name="property[garage]" />
+                  <label for="yes-garage">Yes</label>
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <a id="new-property" href="#">New property</a>
+          <input type="submit" class="btn btn-primary state-all" value="Submit" />
+        </form>
+      </div>
+
+
+      <!-- Sell tab pane -->
+      <div role="tabpanel" class="tab-pane" id="sell">
+        <div id="property-not-selected">
+          Please select a property from the "Properties" tab.
+        </div>
+
+        <div id="property-info">
+          <h1></h1>
+
+          <div id="percent-div">
+            <span id="percent_complete"></span>% Complete
+          </div>
+
+          <div id="missing-fields">
+            <div>Missing Fields:</div>
+            <ul></ul>
+          </div>
+
+          <form id="sell-form" action="#" method="post">
+            <input id="property-id-sell" type="hidden" name="property[id]" />
+
+            <input type="submit" class="btn btn-primary" value="Sell House" />
+          </form>
+        </div>
+      </div>
+
+
+      <!-- Properties tab pane -->
+      <div role="tabpanel" class="tab-pane" id="properties">
+        <div id="properties-list" class="center"></div>
+      </div>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
   window.user = JSON.parse('<%= raw current_user.to_json %>');
+  window.backgroundImageUrl = '<%= asset_path 'irish-house-1230601.jpg' %>';
 </script>

@@ -406,15 +406,15 @@ $(function() {
                                       window.user.subscription.properties || [];
 
     window.dashboardInit();
+    $('#front-page').hide();
   }
   else
     disableDashboard();
 
     function disableDashboard() {
-      $('#subscribe-form input[type=submit]').addClass('disabled');
+      $('body').css('background-image',
+                                      'url(' + window.backgroundImageUrl + ')');
 
-      $('#subscribe-form').submit(function(e) {
-        e.preventDefault();
-      });
+      $('#dashboard').hide();
     }
 });

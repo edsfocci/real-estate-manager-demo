@@ -3,7 +3,7 @@
 
 $(function() {
   window.dashboardInit = function () {
-    var $alertMessage       = $('.alert');
+    var $alertMessage       = $('#dash-alert');
     var $planNumber         = $('#plan_number');
     var $propertyForm       = $('#property-form');
     var $stateInput         = $('#state');

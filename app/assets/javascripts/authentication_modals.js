@@ -9,8 +9,10 @@ $(function() {
   var $authModalLoginBtn    = $('.login-btn-modal');
   var $authModalSignupBtn   = $('.signup-btn-modal');
   var $authModalForgotPwBtn = $('.forgot-password-btn-modal');
+  var $alertMessage         = $('#auth-alert');
 
   updateAuthenticationNav();
+  $('#auth-alert').show();
 
   $('.auth-nav-btn').click(function(e) {
     e.preventDefault();
@@ -56,7 +58,8 @@ $(function() {
     user = { 'user': user };
 
     $.post('/users/sign_in', user, 'json')
-    .done(signInUser);
+    .done(signInUser)
+    .fail(triggerAlert);
   });
 
   $('#sign-up').submit(function(e) {
@@ -89,6 +92,17 @@ $(function() {
   $('#forgot-password').submit(function(e) {
     e.preventDefault();
   });
+
+  /* Helper functions: alerts */
+  function triggerAlert(message) {
+    $alertMessage.html(message.responseText);
+
+    $alertMessage.visFadeIn();
+
+    setTimeout(function() {
+      $alertMessage.visFadeOut();
+    }, 3000);
+  }
 
   function updateAuthenticationNav() {
     $('.auth-nav').hide();

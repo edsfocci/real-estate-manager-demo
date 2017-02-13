@@ -411,6 +411,8 @@ $(function() {
     disableDashboard();
 
     function disableDashboard() {
+      $('#subscribe-form input[type=submit]').addClass('disabled');
+
       $('#subscribe-form').submit(function(e) {
         e.preventDefault();
       });

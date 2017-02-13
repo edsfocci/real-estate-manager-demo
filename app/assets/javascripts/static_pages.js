@@ -407,4 +407,12 @@ $(function() {
 
     window.dashboardInit();
   }
+  else
+    disableDashboard();
+
+    function disableDashboard() {
+      $('#subscribe-form').submit(function(e) {
+        e.preventDefault();
+      });
+    }
 });

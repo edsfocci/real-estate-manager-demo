@@ -55,7 +55,8 @@ $(function() {
 
     user = { 'user': user };
 
-    $.post('/users/sign_in', user);
+    $.post('/users/sign_in', user, 'json')
+    .done(signInUser);
   });
 
   $('#sign-up').submit(function(e) {
@@ -73,14 +74,7 @@ $(function() {
     };
 
     $.post('/users', data)
-    .done(function(data) {
-      data.subscription.properties = data.subscription.properties || [];
-      window.user = data;
-
-      $authModal.modal('hide');
-      updateAuthenticationNav();
-      window.dashboardInit();
-    });
+    .done(signInUser);
   });
 
   /* Bootstrap popovers */
@@ -105,5 +99,9 @@ $(function() {
     } else {
       $('.login-signup').show();
     }
+  }
+
+  function signInUser(user) {
+    location.reload();
   }
 });

@@ -2,7 +2,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal"
+        aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
         <h4 class="modal-title log-in auth-modal-item">Log in</h4>
         <h4 class="modal-title sign-up auth-modal-item">Sign up</h4>
         <h4 class="modal-title forgot-password auth-modal-item">
@@ -10,24 +13,29 @@
       </div>
       <div class="modal-body">
         <div class="log-in auth-modal-item">
-          <form class="new_user" id="log-in" action="/users/sign_in" accept-charset="UTF-8" method="post">
+          <form class="new_user" id="log-in" action="#"
+          accept-charset="UTF-8" method="post">
             <div class="field">
               <label for="user_email">Email</label><br />
-              <input autofocus="autofocus" type="email" value="" name="user[email]" id="user_email_login" />
+              <input autofocus="autofocus" type="email" value=""
+              name="user[email]" id="user_email_login" />
             </div>
 
             <div class="field">
               <label for="user_password">Password</label><br />
-              <input autocomplete="off" type="password" name="user[password]" id="user_password_login" />
+              <input autocomplete="off" type="password" name="user[password]"
+              id="user_password_login" />
             </div>
 
             <div class="field">
-              <input name="user[remember_me]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me_login" />
+              <input name="user[remember_me]" type="hidden" value="0" />
+              <input type="checkbox" value="1" name="user[remember_me]"
+              id="user_remember_me_login" />
               <label for="user_remember_me">Remember me</label>
             </div>
 
             <div class="actions">
-              <input type="submit" name="commit" value="Log in" data-disable-with="Log in" />
+              <input class="btn btn-primary" type="submit" value="Log in" />
             </div>
           </form>
 
@@ -39,22 +47,28 @@
 
 
         <div class="sign-up auth-modal-item">
-          <form class="new_user" id="sign-up" action="/users" accept-charset="UTF-8" method="post">
+          <form class="new_user" id="sign-up" action="#"
+          accept-charset="UTF-8" method="post">
             <div class="field">
               <label for="user_email">Email</label><br />
-              <input autofocus="autofocus" type="email" value="" name="user[email]" id="user_email_signup" />
+              <input autofocus="autofocus" type="email" value=""
+              name="user[email]" id="user_email_signup" />
             </div>
 
             <div class="field">
               <label for="user_password">Password</label>
               <em>(6 characters minimum)</em>
               <br />
-              <input autocomplete="off" type="password" name="user[password]" id="user_password_signup" />
+              <input autocomplete="off" type="password" name="user[password]"
+              id="user_password_signup" />
             </div>
 
             <div class="field">
-              <label for="user_password_confirmation">Password confirmation</label><br />
-              <input autocomplete="off" type="password" name="user[password_confirmation]" id="user_password_confirmation_signup" />
+              <label for="user_password_confirmation">
+                Password confirmation</label><br />
+              <input autocomplete="off" type="password"
+              name="user[password_confirmation]"
+              id="user_password_confirmation_signup" />
             </div>
 
             <div class="form-group">
@@ -67,7 +81,7 @@
             </div>
 
             <div class="actions">
-              <input type="submit" name="commit" value="Sign up" data-disable-with="Sign up" />
+              <input class="btn btn-primary" type="submit" value="Sign up" />
             </div>
           </form>
 
@@ -77,14 +91,17 @@
 
 
         <div class="forgot-password auth-modal-item">
-          <form class="new_user" id="forgot-password" action="/users/passwordn" accept-charset="UTF-8" method="post">
+          <form class="new_user" id="forgot-password" action="/users/passwordn"
+          accept-charset="UTF-8" method="post">
             <div class="field">
               <label for="user_email">Email</label><br />
-              <input autofocus="autofocus" type="email" value="" name="user[email]" id="user_email_forgot_pw" />
+              <input autofocus="autofocus" type="email" value=""
+              name="user[email]" id="user_email_forgot_pw" />
             </div>
 
             <div class="actions">
-              <input type="submit" name="commit" value="Send me reset password instructions" data-disable-with="Send me reset password instructions" />
+              <input class="btn btn-primary" type="submit" name="commit"
+              value="Send me reset password instructions" />
             </div>
           </form>
 

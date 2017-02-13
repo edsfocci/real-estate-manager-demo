@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   # end
   resources 'subscriptions', defaults: { format: :json }
   resources 'properties', defaults: { format: :json }
-  post     'help'    =>  'static_pages#help'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -401,20 +401,19 @@ $(function() {
     }
   };
 
-  if (window.user) {
+  window.user ? showDashboard() : showFrontPage();
+
+  function showFrontPage() {
+    $('body').css('background-image', 'url(' + window.backgroundImageUrl + ')');
+
+    $('#dashboard').hide();
+  }
+
+  function showDashboard() {
     window.user.subscription.properties =
                                       window.user.subscription.properties || [];
 
     window.dashboardInit();
     $('#front-page').hide();
   }
-  else
-    disableDashboard();
-
-    function disableDashboard() {
-      $('body').css('background-image',
-                                      'url(' + window.backgroundImageUrl + ')');
-
-      $('#dashboard').hide();
-    }
 });

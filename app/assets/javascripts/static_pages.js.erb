@@ -1,7 +1,10 @@
 'use strict';
 
-
 $(function() {
+  var user = window.user;
+  // Remove from global scope
+  delete window.user;
+
   window.dashboardInit = function () {
     var $alertMessage       = $('#dash-alert');
     var $planNumber         = $('#plan_number');
@@ -25,7 +28,7 @@ $(function() {
     };
     var textInputs          = ['address', 'roof_type', 'bedrooms', 'bathrooms'];
     var radioInputs         = ['dining_area', 'kitchen', 'pool', 'garage'];
-    var subscription        = window.user.subscription;
+    var subscription        = user.subscription;
     var properties          = subscription.properties;
     var propertiesDict      = {};
     var forSaleCount        = 0;
@@ -401,17 +404,17 @@ $(function() {
     }
   };
 
-  window.user ? showDashboard() : showFrontPage();
+  user ? showDashboard() : showFrontPage();
 
   function showFrontPage() {
-    $('body').css('background-image', 'url(' + window.backgroundImageUrl + ')');
+    $('body').css('background-image',
+                          'url("<%= asset_path 'irish-house-1230601.jpg' %>")');
 
     $('#dashboard').hide();
   }
 
   function showDashboard() {
-    window.user.subscription.properties =
-                                      window.user.subscription.properties || [];
+    user.subscription.properties = user.subscription.properties || [];
 
     window.dashboardInit();
     $('#front-page').hide();

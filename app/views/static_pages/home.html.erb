@@ -4,7 +4,7 @@
   <div id="front-page">
     <h1>
       Welcome to the<br />
-      Real Estate Manager Demo
+      Real Estate Manager {{ 'De' + 'mo' }}
     </h1>
   </div>
 
@@ -49,7 +49,7 @@
 
       <!-- Property tab pane -->
       <div role="tabpanel" class="tab-pane" id="property">
-        <form id="property-form" action="#" method="post" class="center">
+        <!-- <form id="property-form" action="#" method="post" class="center">
           <div class="form-group">
             <label for="state">State</label>
             <select id="state" name="property[state]">
@@ -70,10 +70,10 @@
               <label for="roof_type">Roof type</label>
               <input id="roof_type" type="text" name="property[roof_type]" />
             </div>
-          </div>
+          </div> -->
 
           <!-- Dallas-specific form fields -->
-          <div id="state-dallas" class="state-dependent">
+          <!-- <div id="state-dallas" class="state-dependent">
             <div class="form-group">
               <label for="bedrooms">Bedrooms</label>
               <input id="bedrooms" type="number" name="property[bedrooms]" />
@@ -83,10 +83,10 @@
               <label for="bathrooms">Bathrooms</label>
               <input id="bathrooms" type="number" name="property[bathrooms]" />
             </div>
-          </div>
+          </div> -->
 
           <!-- Austin-specific form fields -->
-          <div id="state-austin" class="state-dependent">
+          <!-- <div id="state-austin" class="state-dependent">
             <div class="form-group">
               <label for="dining_area">Dining Area</label>
               <span class="radio-group">
@@ -112,10 +112,10 @@
                 </span>
               </span>
             </div>
-          </div>
+          </div> -->
 
           <!-- Houston-specific form fields -->
-          <div id="state-houston" class="state-dependent">
+          <!-- <div id="state-houston" class="state-dependent">
             <div class="form-group">
               <label for="pool">Pool</label>
               <span class="radio-group">
@@ -143,7 +143,8 @@
 
           <a id="new-property" href="#">New property</a>
           <input type="submit" class="btn btn-primary state-all" value="Submit" />
-        </form>
+        </form> -->
+        <properties-form></properties-form>
       </div>
 
 
@@ -176,7 +177,8 @@
 
       <!-- Properties tab pane -->
       <div role="tabpanel" class="tab-pane" id="properties">
-        <div id="properties-list" class="center"></div>
+        <!-- <div id="properties-list" class="center"></div> -->
+        <properties-list class="center"></properties-list>
       </div>
     </div>
   </div>

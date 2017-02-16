@@ -1,0 +1,107 @@
+<form method="post" class="center" ng-submit="$ctrl.submitForm()">
+  <div class="form-group">
+    <label for="state">State</label>
+    <select id="state" name="property[state]" ng-model="$ctrl.property.state"
+    ng-options="state for state in states">
+    </select>
+  </div>
+
+  <div class="state-all" ng-show="$ctrl.property.state">
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input id="address" type="text" name="property[address]"
+      ng-model="$ctrl.property.address" />
+    </div>
+
+    <div class="form-group">
+      <label for="roof_type">Roof type</label>
+      <input id="roof_type" type="text" name="property[roof_type]"
+      ng-model="$ctrl.property.roof_type" />
+    </div>
+  </div>
+
+  <!-- Dallas-specific form fields -->
+  <div ng-switch on="$ctrl.property.state">
+    <div id="state-dallas" class="state-dependent" ng-switch-when="Dallas">
+      <div class="form-group">
+        <label for="bedrooms">Bedrooms</label>
+        <input id="bedrooms" type="number" name="property[bedrooms]"
+        ng-model="$ctrl.property.bedrooms" />
+      </div>
+
+      <div class="form-group">
+        <label for="bathrooms">Bathrooms</label>
+        <input id="bathrooms" type="number" name="property[bathrooms]"
+        ng-model="$ctrl.property.bathrooms" />
+      </div>
+    </div>
+
+    <!-- Austin-specific form fields -->
+    <div id="state-austin" class="state-dependent" ng-switch-when="Austin">
+      <div class="form-group">
+        <label for="dining_area">Dining Area</label>
+        <span class="radio-group">
+          <span class="center">
+            <input id="no-dining_area" type="radio" name="property[dining_area]"
+            ng-model="$ctrl.property.dining_area" ng-value="false" />
+            <label for="no-dining_area">No</label>
+            <input id="yes-dining_area" type="radio" name="property[dining_area]"
+            ng-model="$ctrl.property.dining_area" ng-value="true" />
+            <label for="yes-dining_area">Yes</label>
+          </span>
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="kitchen">Kitchen</label>
+        <span class="radio-group">
+          <span class="center">
+            <input id="no-kitchen" type="radio" name="property[kitchen]"
+            ng-model="$ctrl.property.kitchen" ng-value="false" />
+            <label for="no-kitchen">No</label>
+            <input id="yes-kitchen" type="radio" name="property[kitchen]"
+            ng-model="$ctrl.property.kitchen" ng-value="true" />
+            <label for="yes-kitchen">Yes</label>
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Houston-specific form fields -->
+    <div id="state-houston" class="state-dependent" ng-switch-when="Houston">
+      <div class="form-group">
+        <label for="pool">Pool</label>
+        <span class="radio-group">
+          <span class="center">
+            <input id="no-pool" type="radio" name="property[pool]"
+            ng-model="$ctrl.property.pool" ng-value="false" />
+            <label for="no-pool">No</label>
+            <input id="yes-pool" type="radio" name="property[pool]"
+            ng-model="$ctrl.property.pool" ng-value="true" />
+            <label for="yes-pool">Yes</label>
+          </span>
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="garage">Garage</label>
+        <span class="radio-group">
+          <span class="center">
+            <input id="no-garage" type="radio" name="property[garage]"
+            ng-model="$ctrl.property.garage" ng-value="false" />
+            <label for="no-garage">No</label>
+            <input id="yes-garage" type="radio" name="property[garage]"
+            ng-model="$ctrl.property.garage" ng-value="true" />
+            <label for="yes-garage">Yes</label>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <a id="new-property" ng-show="$ctrl.property._id"
+  ng-click="$ctrl.clearForm()">New property</a>
+
+  <input type="submit" class="btn btn-primary state-all" value="Submit"
+  ng-show="$ctrl.property.state" />
+</form>

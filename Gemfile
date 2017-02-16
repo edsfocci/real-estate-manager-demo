@@ -33,8 +33,9 @@ gem 'jbuilder',       '2.6.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'mongoid',        '6.1.0'
-gem 'devise',         '4.2.0'
+gem 'mongoid',                  '6.1.0'
+gem 'devise',                   '4.2.0'
+gem 'angular-rails-templates',  '1.0.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

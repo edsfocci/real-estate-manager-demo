@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="realEstateApp">
   <head>
     <title>A Web Page</title>
     <%= render 'layouts/html5shiv' %>
@@ -7,8 +7,7 @@
 
     <%= stylesheet_link_tag     'application', media: 'all',
                                 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag  'application',
-                                'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
@@ -17,5 +16,8 @@
       <%= yield %>
     </div>
     <%= render 'layouts/authentication_modals' %>
+
+    <%= javascript_include_tag  'application',
+                                'data-turbolinks-track': 'reload' %>
   </body>
 </html>

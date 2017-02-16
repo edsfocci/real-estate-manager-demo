@@ -3,7 +3,7 @@
 $(function() {
   var user = window.user;
   // Remove from global scope
-  delete window.user;
+  // delete window.user;
 
   window.dashboardInit = function () {
     var $alertMessage       = $('#dash-alert');
@@ -19,12 +19,12 @@ $(function() {
     var $propertiesList     = $('#properties-list');
 
     var propertyFieldsDict  = {
-      'Dallas':   ['address', 'roof_type', 'bedrooms', 'bathrooms'],
-      'Austin':   ['address', 'roof_type', 'dining_area', 'kitchen'],
-      'Houston':  ['address', 'roof_type', 'pool', 'garage']
+      Dallas:   ['address', 'roof_type', 'bedrooms', 'bathrooms'],
+      Austin:   ['address', 'roof_type', 'dining_area', 'kitchen'],
+      Houston:  ['address', 'roof_type', 'pool', 'garage']
     };
     var radioInputSet       = {
-      'dining_area': null, 'kitchen': null, 'pool': null, 'garage': null
+      dining_area: null, kitchen: null, pool: null, garage: null
     };
     var textInputs          = ['address', 'roof_type', 'bedrooms', 'bathrooms'];
     var radioInputs         = ['dining_area', 'kitchen', 'pool', 'garage'];
@@ -44,14 +44,14 @@ $(function() {
       e.preventDefault();
 
       var subscriptionData = {
-        'subscription': {
-          'plan_number': $planNumber.val()
+        subscription: {
+          plan_number: $planNumber.val()
         }
       };
 
       $.ajax('/subscriptions/' + subscription._id.$oid, {
-        'method': 'PATCH',
-        'data':   subscriptionData
+        method: 'PATCH',
+        data:   subscriptionData
       })
       .done(function(data) {
         subscription.plan_number = data.plan_number;
@@ -66,22 +66,22 @@ $(function() {
       updateStateForm();
     });
 
-    $newPropertyBtn.click(function(e) {
-      e.preventDefault();
-
-      // Hide Property tab-pane elements
-      $stateAll.hide();
-      $stateDependent.hide();
-      $newPropertyBtn.hide();
-
-      clearPropertyInputs();
-    });
+    // $newPropertyBtn.click(function(e) {
+    //   e.preventDefault();
+    //
+    //   // Hide Property tab-pane elements
+    //   $stateAll.hide();
+    //   $stateDependent.hide();
+    //   $newPropertyBtn.hide();
+    //
+    //   clearPropertyInputs();
+    // });
 
     $propertyForm.submit(function(e) {
       e.preventDefault();
 
       var propertyData    = {
-        'state': stringHumanReadable($stateInput.val())
+        state: stringHumanReadable($stateInput.val())
       };
       var propertyFields  = propertyFieldsDict[propertyData.state];
       var propertyId      = $('#property-id-edit').val();
@@ -97,7 +97,7 @@ $(function() {
         else if (typeof $('#' + propertyFields[i]).val() === 'string' &&
             $('#' + propertyFields[i]).val().trim())
           propertyData[propertyFields[i]] = $('#' + propertyFields[i]).val()
-                                                                          .trim();
+                                                                        .trim();
         else if ($('#' + propertyFields[i]).val())
           propertyData[propertyFields[i]] = $('#' + propertyFields[i]).val();
         else
@@ -109,8 +109,8 @@ $(function() {
 
       if (propertyId)
         promise = $.ajax('/properties/' + propertyId, {
-          'method': 'PATCH',
-          'data':   propertyData
+          method: 'PATCH',
+          data:   propertyData
         });
       else
         promise = $.post('/properties/', propertyData);
@@ -145,8 +145,8 @@ $(function() {
       }
 
       $.ajax('/properties/' + propertyId, {
-        'method': 'PATCH',
-        'data':   propertyData
+        method: 'PATCH',
+        data:   propertyData
       })
       .done(function(data) {
         if (data.for_sale)
@@ -161,11 +161,11 @@ $(function() {
 
     /* Bootstrap popovers */
     $planNumber.popover({
-      'content':  '1 = can sell only 1 property<br />' +
-                  '2 = can sell only 2 properties<br />' +
-                  '3 = can sell only 3 properties',
-      'trigger':  'hover',
-      'html':     true
+      content:  '1 = can sell only 1 property<br />' +
+                '2 = can sell only 2 properties<br />' +
+                '3 = can sell only 3 properties',
+      trigger:  'hover',
+      html:     true
     });
 
     /* Helper functions: alerts */
@@ -187,7 +187,7 @@ $(function() {
         $stateAll.show();
         $stateDependent.hide();
 
-        $('#state-' + stateChosen).show();
+        // $('#state-' + stateChosen).show();
       }
     }
 
@@ -263,9 +263,9 @@ $(function() {
             sellBtnMessage = '<ul>' + sellBtnMessage + '</ul>';
 
             $sellFormSubmit.popover({
-              'content':  sellBtnMessage,
-              'trigger':  'hover',
-              'html':     true
+              content:  sellBtnMessage,
+              trigger:  'hover',
+              html:     true
             });
           }
           else

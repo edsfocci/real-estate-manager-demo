@@ -17,6 +17,10 @@ a:hover {
   text-decoration:    none;
 }
 
+a[ng-click] {
+  cursor:             pointer;
+}
+
 form {
   display:            inline-block;
 }
@@ -68,7 +72,8 @@ form {
 }
 
 #property {
-  #property-form {
+  #property-form,
+  properties-form > form {
     width:            355px;
 
     label {
@@ -101,7 +106,7 @@ form {
     }
 
     #new-property {
-      display:        none;
+      // display:        none;
       position:       relative;
       top:            7px;
     }
@@ -111,9 +116,11 @@ form {
     }
   }
 
-  .state-all,
-  .state-dependent {
-    display:          none;
+  #property-form {
+    .state-all,
+    .state-dependent {
+      display:          none;
+    }
   }
 }
 
@@ -148,7 +155,9 @@ form {
 }
 
 #properties {
-  #properties-list {
+  #properties-list,
+  properties-list {
+    display:          block;
     margin-top:       25px;
     padding:          15px;
     width:            500px;

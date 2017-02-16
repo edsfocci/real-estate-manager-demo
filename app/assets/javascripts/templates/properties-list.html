@@ -1,0 +1,10 @@
+<div ng-repeat="property in $ctrl.properties">
+  <a ng-click="$ctrl.selectProperty(property)">
+    <span class="property_address">
+      {{property.address}} {{property.state}} Texas
+    </span>
+    <span class="property_status">
+      {{property.for_sale | forSale}}
+    </span>
+  </a>
+</div>

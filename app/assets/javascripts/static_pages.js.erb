@@ -33,34 +33,34 @@ $(function() {
     var propertiesDict      = {};
     var forSaleCount        = 0;
 
-    $planNumber.val(subscription.plan_number);
+    // $planNumber.val(subscription.plan_number);
     updateStateForm();
 
     for (var i = 0; i < properties.length; i++)
       updateProperty(properties[i]);
 
     // Submit change in subscription's plan_number
-    $('#subscribe-form').submit(function(e) {
-      e.preventDefault();
-
-      var subscriptionData = {
-        subscription: {
-          plan_number: $planNumber.val()
-        }
-      };
-
-      $.ajax('/subscriptions/' + subscription._id.$oid, {
-        method: 'PATCH',
-        data:   subscriptionData
-      })
-      .done(function(data) {
-        subscription.plan_number = data.plan_number;
-        if ($sellPropertyId.val())
-          updateSellPane(propertiesDict[$sellPropertyId.val()]);
-
-        triggerAlert('Subscription updated.');
-      });
-    });
+    // $('#subscribe-form').submit(function(e) {
+    //   e.preventDefault();
+    //
+    //   var subscriptionData = {
+    //     subscription: {
+    //       plan_number: $planNumber.val()
+    //     }
+    //   };
+    //
+    //   $.ajax('/subscriptions/' + subscription._id.$oid, {
+    //     method: 'PATCH',
+    //     data:   subscriptionData
+    //   })
+    //   .done(function(data) {
+    //     subscription.plan_number = data.plan_number;
+    //     if ($sellPropertyId.val())
+    //       updateSellPane(propertiesDict[$sellPropertyId.val()]);
+    //
+    //     triggerAlert('Subscription updated.');
+    //   });
+    // });
 
     $stateInput.change(function() {
       updateStateForm();

@@ -27,7 +27,7 @@ function PropertiesFormController($scope, $http,
     var promise;
 
     for (var key in this.property)
-      propertyData.property[key] = this.property[key]
+      propertyData.property[key] = this.property[key];
 
     propertyData.property.state += 'Property';
 

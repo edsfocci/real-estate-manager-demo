@@ -22,6 +22,7 @@
 //  Angular App
 //= require ./app/app.module
 //= require ./app/subscription/subscription.module
+//= require ./app/subscription/subscription.service
 //= require ./app/subscription/subscription.component
 //= require ./app/properties-form/properties-form.module
 //= require ./app/properties-form/properties-form.service

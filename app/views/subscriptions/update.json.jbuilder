@@ -1,1 +1,1 @@
-json.(@subscription, :plan_number)
+json.(@subscription, :_id, :plan_number)

@@ -1,24 +1,9 @@
-# README
+# Real Estate Manager Demo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Stack
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby 2.3
+* Rails 5
+* Database: MongoDB (using Mongiod ODM framework)
+* Frontend: Angular 1.5 w/ Bootstrap 3.3
+* Authentication: Devise

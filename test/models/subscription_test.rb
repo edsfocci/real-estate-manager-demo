@@ -3,7 +3,11 @@ require 'test_helper'
 class SubscriptionTest < ActiveSupport::TestCase
   def setup
     User.destroy_all
-    @user = User.create(username: 'Test User')
+    @user = User.create(
+      email: 'test@user.com',
+      password: '123456',
+      password_confirmation: '123456'
+    )
   end
 
   test 'valid plan number' do

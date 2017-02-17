@@ -14,8 +14,10 @@ function PropertiesListService(core) {
 
 
   function getProperties() {
-    this.properties = this.properties ||  window.user.subscription.properties
-                                            .map(core.setPropertyState);
+    this.properties = this.properties ||
+                      window.user.subscription.properties || [];
+
+    this.properties = this.properties.map(core.setPropertyState);
 
     return this.properties;
   }

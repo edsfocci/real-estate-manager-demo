@@ -15,6 +15,7 @@ function PropertiesDetailController($http, propertiesDetail, propertiesList,
   this.property     = propertiesDetail.getProperty();
   this.forSaleCount = propertiesDetail.getForSaleCount();
   this.subscription = subscription.getSubscription();
+  propertiesDetail.setSubscription(this.subscription);
 
   /* Event handlers */
   this.submitForm = function() {

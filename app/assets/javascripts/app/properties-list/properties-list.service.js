@@ -10,6 +10,7 @@ function PropertiesListService(core) {
   this.getProperties  = getProperties;
   this.addProperty    = addProperty;
   this.updateProperty = updateProperty;
+  this.deleteProperty = deleteProperty;
 
 
   function getProperties() {
@@ -41,5 +42,14 @@ function PropertiesListService(core) {
     }
     else
       this.addProperty(updatedProperty);
+  }
+
+  function deleteProperty(propertyId) {
+    var doomedProperty = this.properties.filter(function(property) {
+      return property._id.$oid === propertyId;
+    })[0];
+    var doomedIndex = this.properties.indexOf(doomedProperty);
+
+    this.properties.splice(doomedIndex, 1);
   }
 }

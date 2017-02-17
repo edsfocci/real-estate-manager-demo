@@ -16,6 +16,11 @@ class PropertiesController < ApplicationController
     @property.update property_params
   end
 
+  def destroy
+    @property = current_user.subscription.properties.find params[:id]
+    @property.destroy
+  end
+
   private
 
     def property_params

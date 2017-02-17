@@ -7,10 +7,10 @@ angular.
     controller: PropertiesListController
   });
 
-PropertiesListController.$inject = ['core', 'propertiesList', 'propertiesForm',
-                                    'propertiesDetail'];
+PropertiesListController.$inject = ['$http', 'core', 'propertiesList',
+                                    'propertiesForm', 'propertiesDetail'];
 
-function PropertiesListController(core, propertiesList, propertiesForm,
+function PropertiesListController($http, core, propertiesList, propertiesForm,
                                   propertiesDetail) {
   this.properties = propertiesList.getProperties();
 
@@ -28,4 +28,16 @@ function PropertiesListController(core, propertiesList, propertiesForm,
     if ($('#dash-alert').css('display') === 'none')
       core.triggerAlert('Property selected.');
   };
+
+  this.deleteProperty = function(property) {
+    window.wawaw = property;
+    var propertyId = property._id.$oid;
+
+    $http.delete('/properties/' + propertyId)
+    .then(function(response) {
+      propertiesList.deleteProperty(response.data._id.$oid);
+
+      core.triggerAlert('Property removed.');
+    });
+  }
 }

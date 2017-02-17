@@ -3,8 +3,14 @@
     <span class="property_address">
       {{property.address}} {{property.state}} Texas
     </span>
-    <span class="property_status">
-      {{property.for_sale | forSale}}
-    </span>
   </a>
+
+  <a class="property_delete text-danger"
+  ng-click="$ctrl.deleteProperty(property)">
+    Remove
+  </a>
+
+  <span class="property_status">
+    {{property.for_sale | forSale}}
+  </span>
 </div>

@@ -38,6 +38,11 @@ function PropertiesDetailController($http, propertiesDetail, propertiesList,
 
       propertiesDetail.setProperty(submittedProperty);
       propertiesList.updateProperty(submittedProperty);
+
+      if (submittedProperty.for_sale)
+        window.appHelpers.triggerAlert('Property is now for sale.');
+      else
+        window.appHelpers.triggerAlert('Property is no longer for sale.');
     });
   };
 }

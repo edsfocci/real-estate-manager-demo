@@ -25,10 +25,7 @@ function SubscriptionController($scope, $http, subscription) {
 
       subscription.setSubscription(submittedSubscription);
 
-      // if ($sellPropertyId.val())
-      //   updateSellPane(propertiesDict[$sellPropertyId.val()]);
-      //
-      // triggerAlert('Subscription updated.');
+      window.appHelpers.triggerAlert('Subscription updated.');
     });
   };
 }

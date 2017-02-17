@@ -23,5 +23,8 @@ function PropertiesListController(propertiesList, propertiesForm,
   this.selectProperty = function(property) {
     propertiesForm.setProperty(property);
     propertiesDetail.setProperty(property);
+
+    if ($('#dash-alert').css('display') === 'none')
+      window.appHelpers.triggerAlert('Property selected.');
   };
 }

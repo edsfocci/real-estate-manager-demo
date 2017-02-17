@@ -1,7 +1,31 @@
 'use strict';
 
 $(function() {
+  var $alertMessage = $('#dash-alert');
+  var $planNumber   = $('#plan_number');
+
   window.user ? showDashboard() : showFrontPage();
+
+  window.appHelpers = {
+    triggerAlert: function(message) {
+      $alertMessage.html(message);
+
+      $alertMessage.fadeIn();
+
+      setTimeout(function() {
+        $alertMessage.fadeOut();
+      }, 3000);
+    }
+  };
+
+  /* Bootstrap popovers */
+  $planNumber.popover({
+    'content':  '1 = can sell only 1 property<br />' +
+                '2 = can sell only 2 properties<br />' +
+                '3 = can sell only 3 properties',
+    'trigger':  'hover',
+    'html':     true
+  });
 
   function showFrontPage() {
     $('body').css('background-image',

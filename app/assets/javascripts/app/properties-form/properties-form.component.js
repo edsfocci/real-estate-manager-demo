@@ -43,10 +43,10 @@ function PropertiesFormController($scope, $http, propertiesForm,
       propertiesDetail.setProperty(submittedProperty);
       propertiesList.updateProperty(submittedProperty);
 
-      // if (propertiesDict[data._id.$oid])
-      //   triggerAlert('Property updated.');
-      // else
-      //   triggerAlert('Property added.');
+      if (propertyId)
+        window.appHelpers.triggerAlert('Property updated.');
+      else
+        window.appHelpers.triggerAlert('Property added.');
     });
   };
 

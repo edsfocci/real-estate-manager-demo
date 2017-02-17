@@ -18,7 +18,6 @@ function SubscriptionController($scope, $http, subscription) {
   this.submitForm = function() {
     var subscriptionId = this.subscription._id.$oid;
     var subscriptionData = { subscription: this.subscription };
-    var promise;
 
     $http.patch('/subscriptions/' + subscriptionId, subscriptionData)
     .then(function(response) {

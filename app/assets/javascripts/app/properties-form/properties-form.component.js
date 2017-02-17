@@ -7,11 +7,11 @@ angular.
     controller: PropertiesFormController
   });
 
-PropertiesFormController.$inject = ['$scope', '$http',
-                                    'propertiesForm', 'propertiesList'];
+PropertiesFormController.$inject = ['$scope', '$http', 'propertiesForm',
+                                    'propertiesDetail', 'propertiesList'];
 
-function PropertiesFormController($scope, $http,
-                                  propertiesForm, propertiesList) {
+function PropertiesFormController($scope, $http, propertiesForm,
+                                  propertiesDetail, propertiesList) {
   $scope.states = [
     'Dallas',
     'Austin',
@@ -40,6 +40,7 @@ function PropertiesFormController($scope, $http,
       var submittedProperty = setPropertyState(response.data);
 
       propertiesForm.setProperty(submittedProperty);
+      propertiesDetail.setProperty(submittedProperty);
       propertiesList.updateProperty(submittedProperty);
 
       // if (propertiesDict[data._id.$oid])

@@ -2,5 +2,6 @@
 
 angular.
   module('propertiesList', [
-    'propertiesForm'
+    'propertiesForm',
+    'propertiesDetail'
   ]);

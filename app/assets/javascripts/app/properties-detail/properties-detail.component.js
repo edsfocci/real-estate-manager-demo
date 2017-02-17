@@ -3,26 +3,46 @@
 angular.
   module('propertiesDetail').
   component('propertiesDetail', {
-    template:
-      '<div ng-repeat="property in $ctrl.properties">' +
-        '<a href="#" id="{{property._id.$oid}}">' +
-          '<span class="property_address">' +
-            '{{property.address}} {{property.state}} Texas' +
-          '</span>' +
-          '<span class="property_status">' +
-            '{{property.for_sale | forSale}}' +
-          '</span>' +
-        '</a>' +
-      '</div>',
-    controller: PropertyListController
+    templateUrl: 'properties-detail.html',
+    controller: PropertiesDetailController
   });
 
-function PropertyListController() {
-  var properties = window.user.subscription.properties;
+PropertiesDetailController.$inject = ['$http', 'propertiesDetail',
+                                      'propertiesList', 'subscription'];
 
-  this.properties = properties.map(setPropertyState);
+function PropertiesDetailController($http, propertiesDetail, propertiesList,
+                                    subscription) {
+  this.property     = propertiesDetail.getProperty();
+  this.forSaleCount = propertiesDetail.getForSaleCount();
+  this.subscription = subscription.getSubscription();
+
+  /* Event handlers */
+  this.submitForm = function() {
+    var self = this;
+    var propertyId = this.property._id.$oid;
+    var propertyData = { property: {} };
+
+    for (var key in this.property)
+      propertyData.property[key] = this.property[key];
+
+    propertyData.property.for_sale = !propertyData.property.for_sale;
+
+    $http.patch('/properties/' + propertyId, propertyData)
+    .then(function(response) {
+      var submittedProperty = setPropertyState(response.data);
+
+      if (submittedProperty.for_sale)
+        self.forSaleCount.forSaleCount++;
+      else
+        self.forSaleCount.forSaleCount--;
+
+      propertiesDetail.setProperty(submittedProperty);
+      propertiesList.updateProperty(submittedProperty);
+    });
+  };
 }
 
+/* Helper function */
 function setPropertyState(property) {
   if ('bedrooms' in property)
     property.state = 'Dallas';

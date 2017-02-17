@@ -4,5 +4,7 @@ angular.
   module('realEstateApp', [
     'templates',
     'subscription',
-    'propertiesList'
+    'propertiesList',
+    'propertiesDetail',
+    'propertiesForm'
   ]);

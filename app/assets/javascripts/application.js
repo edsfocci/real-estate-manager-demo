@@ -32,6 +32,7 @@
 //= require ./app/properties-list/properties-list.service
 //= require ./app/properties-list/properties-list.component
 //= require ./app/properties-detail/properties-detail.module
+//= require ./app/properties-detail/properties-detail.service
 //= require ./app/properties-detail/properties-detail.component
 
 //= require_tree .

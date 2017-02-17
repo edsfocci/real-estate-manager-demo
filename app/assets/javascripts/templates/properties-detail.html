@@ -1,22 +1,30 @@
-<div id="property-not-selected">
+<div id="property-not-selected" ng-hide="$ctrl.property._id">
   Please select a property from the "Properties" tab.
 </div>
 
-<div id="property-info">
-  <h1></h1>
+<div id="property-info" ng-show="$ctrl.property._id">
+  <h1>{{$ctrl.property.address}} {{$ctrl.property.state}} Texas</h1>
 
   <div id="percent-div">
-    <span id="percent_complete"></span>% Complete
+    <span id="percent_complete">
+      {{100 - (25 * $ctrl.property.missingFields.length)}}</span>% Complete
   </div>
 
-  <div id="missing-fields">
+  <div id="missing-fields" ng-show="$ctrl.property.missingFields.length">
     <div>Missing Fields:</div>
-    <ul></ul>
+    <ul>
+      <li ng-repeat="field in $ctrl.property.missingFields">{{field}}</li>
+    </ul>
   </div>
 
-  <form id="sell-form" action="#" method="post">
+  <form id="sell-form" ng-submit="$ctrl.submitForm()">
     <input id="property-id-sell" type="hidden" name="property[id]" />
 
-    <input type="submit" class="btn btn-primary" value="Sell House" />
+    <input type="submit" class="btn btn-primary"
+    value="Sell House" ng-hide="$ctrl.property.for_sale"
+    ng-disabled="$ctrl.property.missingFields.length || $ctrl.forSaleCount.forSaleCount >= $ctrl.subscription.plan_number" />
+
+    <input type="submit" class="btn btn-primary"
+    value="Unsell House" ng-show="$ctrl.property.for_sale" />
   </form>
 </div>

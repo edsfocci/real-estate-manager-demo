@@ -5,6 +5,7 @@ angular.
     'templates',
     'subscription',
     'propertiesList',
+    'propertiesForm',
     'propertiesDetail',
-    'propertiesForm'
+    'propertiesRemove'
   ]);

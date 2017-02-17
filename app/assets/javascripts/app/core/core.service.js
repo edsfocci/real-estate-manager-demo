@@ -24,7 +24,6 @@ function CoreService() {
   }
 
   function triggerAlert(message) {
-    window.winow = message;
     var $alertMessage = $('#dash-alert');
 
     $alertMessage

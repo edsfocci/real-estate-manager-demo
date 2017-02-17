@@ -4,5 +4,6 @@ angular.
   module('propertiesList', [
     'core',
     'propertiesForm',
-    'propertiesDetail'
+    'propertiesDetail',
+    'propertiesRemove'
   ]);

@@ -24,15 +24,18 @@
 //= require ./app/subscription/subscription.module
 //= require ./app/subscription/subscription.service
 //= require ./app/subscription/subscription.component
-//= require ./app/properties-form/properties-form.module
-//= require ./app/properties-form/properties-form.service
-//= require ./app/properties-form/properties-form.component
 //= require ./app/properties-list/properties-list.module
 //= require ./app/properties-list/properties-list.for-sale.filter
 //= require ./app/properties-list/properties-list.service
 //= require ./app/properties-list/properties-list.component
+//= require ./app/properties-form/properties-form.module
+//= require ./app/properties-form/properties-form.service
+//= require ./app/properties-form/properties-form.component
 //= require ./app/properties-detail/properties-detail.module
 //= require ./app/properties-detail/properties-detail.service
 //= require ./app/properties-detail/properties-detail.component
+//= require ./app/properties-remove/properties-remove.module
+//= require ./app/properties-remove/properties-remove.service
+//= require ./app/properties-remove/properties-remove.component
 
 //= require_tree .

@@ -5,8 +5,9 @@ angular.
   service('propertiesForm', PropertiesFormService);
 
 function PropertiesFormService() {
-  this.getProperty = getProperty;
-  this.setProperty = setProperty;
+  this.getProperty    = getProperty;
+  this.setProperty    = setProperty;
+  this.removeProperty = removeProperty;
 
 
   function getProperty() {
@@ -21,5 +22,10 @@ function PropertiesFormService() {
 
     for (var key in property)
       this.property[key] = property[key];
+  }
+
+  function removeProperty(property) {
+    if (this.property._id.$oid === property._id.$oid)
+      this.setProperty({});
   }
 }

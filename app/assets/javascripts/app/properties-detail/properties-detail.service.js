@@ -7,6 +7,7 @@ angular.
 function PropertiesDetailService() {
   this.getProperty        = getProperty;
   this.setProperty        = setProperty;
+  this.removeProperty     = removeProperty;
   this.getSubscription    = getSubscription;
   this.setSubscription    = setSubscription;
   this.getForSaleCount    = getForSaleCount;
@@ -30,6 +31,11 @@ function PropertiesDetailService() {
     addDetails(this.property);
 
     this.updateSellPopover();
+  }
+
+  function removeProperty(property) {
+    if (this.property._id.$oid === property._id.$oid)
+      this.setProperty({});
   }
 
   function getSubscription() {
@@ -62,7 +68,7 @@ function PropertiesDetailService() {
     var $sellFormSubmit = $('#sell-form input[type=submit]');
     var sellBtnMessage  = '';
 
-    if ($('#property-info').is(':hidden'))
+    if (!this.property._id)
       return;
 
     if (this.property.missingFields.length)

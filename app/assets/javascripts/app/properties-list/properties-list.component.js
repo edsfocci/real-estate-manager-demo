@@ -8,10 +8,11 @@ angular.
   });
 
 PropertiesListController.$inject = ['$http', 'core', 'propertiesList',
-                                    'propertiesForm', 'propertiesDetail'];
+                                    'propertiesForm', 'propertiesDetail',
+                                    'propertiesRemove'];
 
 function PropertiesListController($http, core, propertiesList, propertiesForm,
-                                  propertiesDetail) {
+                                  propertiesDetail, propertiesRemove) {
   this.properties = propertiesList.getProperties();
 
   var forSaleCount = this.properties.filter(function(property) {
@@ -29,15 +30,7 @@ function PropertiesListController($http, core, propertiesList, propertiesForm,
       core.triggerAlert('Property selected.');
   };
 
-  this.deleteProperty = function(property) {
-    window.wawaw = property;
-    var propertyId = property._id.$oid;
-
-    $http.delete('/properties/' + propertyId)
-    .then(function(response) {
-      propertiesList.deleteProperty(response.data._id.$oid);
-
-      core.triggerAlert('Property removed.');
-    });
+  this.deletePropertyConfirm = function(property) {
+    propertiesRemove.deletePropertyConfirm(property);
   }
 }

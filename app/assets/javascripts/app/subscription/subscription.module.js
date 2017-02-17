@@ -1,4 +1,6 @@
 'use strict';
 
 angular.
-  module('subscription', []);
+  module('subscription', [
+    'propertiesDetail'
+  ]);

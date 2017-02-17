@@ -7,15 +7,16 @@ angular.
     controller: PropertiesDetailController
   });
 
-PropertiesDetailController.$inject = ['$http', 'propertiesDetail',
-                                      'propertiesList', 'subscription'];
+PropertiesDetailController.$inject = ['$http', 'core', 'propertiesDetail',
+                                      'subscription', 'propertiesList'];
 
-function PropertiesDetailController($http, propertiesDetail, propertiesList,
-                                    subscription) {
+function PropertiesDetailController($http, core, propertiesDetail, subscription,
+                                    propertiesList) {
   this.property     = propertiesDetail.getProperty();
   this.forSaleCount = propertiesDetail.getForSaleCount();
-  this.subscription = subscription.getSubscription();
-  propertiesDetail.setSubscription(this.subscription);
+  propertiesDetail.setSubscription(subscription.getSubscription());
+  this.subscription = propertiesDetail.getSubscription();
+
 
   /* Event handlers */
   this.submitForm = function() {
@@ -30,7 +31,7 @@ function PropertiesDetailController($http, propertiesDetail, propertiesList,
 
     $http.patch('/properties/' + propertyId, propertyData)
     .then(function(response) {
-      var submittedProperty = setPropertyState(response.data);
+      var submittedProperty = core.setPropertyState(response.data);
 
       if (submittedProperty.for_sale)
         self.forSaleCount.forSaleCount++;
@@ -41,23 +42,9 @@ function PropertiesDetailController($http, propertiesDetail, propertiesList,
       propertiesList.updateProperty(submittedProperty);
 
       if (submittedProperty.for_sale)
-        window.appHelpers.triggerAlert('Property is now for sale.');
+        core.triggerAlert('Property is now for sale.');
       else
-        window.appHelpers.triggerAlert('Property is no longer for sale.');
+        core.triggerAlert('Property is no longer for sale.');
     });
   };
-}
-
-/* Helper function */
-function setPropertyState(property) {
-  if ('bedrooms' in property)
-    property.state = 'Dallas';
-
-  if ('kitchen' in property)
-    property.state = 'Austin';
-
-  if ('pool' in property)
-    property.state = 'Houston';
-
-  return property;
 }

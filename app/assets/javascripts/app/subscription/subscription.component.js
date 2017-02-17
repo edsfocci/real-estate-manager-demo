@@ -7,12 +7,15 @@ angular.
     controller: SubscriptionController
   });
 
-SubscriptionController.$inject = ['$scope', '$http', 'subscription'];
+SubscriptionController.$inject = ['$scope', '$http', 'core', 'subscription',
+                                  'propertiesDetail'];
 
-function SubscriptionController($scope, $http, subscription) {
+function SubscriptionController($scope, $http, core, subscription,
+                                propertiesDetail) {
   $scope.planNumbers = [1, 2, 3];
 
   this.subscription = subscription.getSubscription();
+
 
   /* Event handlers */
   this.submitForm = function() {
@@ -24,8 +27,10 @@ function SubscriptionController($scope, $http, subscription) {
       var submittedSubscription = response.data;
 
       subscription.setSubscription(submittedSubscription);
+      propertiesDetail.setSubscription(submittedSubscription);
+      propertiesDetail.updateSellPopover();
 
-      window.appHelpers.triggerAlert('Subscription updated.');
+      core.triggerAlert('Subscription updated.');
     });
   };
 }

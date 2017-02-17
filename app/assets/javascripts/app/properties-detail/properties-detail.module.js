@@ -2,6 +2,7 @@
 
 angular.
   module('propertiesDetail', [
-    'propertiesList',
-    'subscription'
+    'core',
+    'subscription',
+    'propertiesList'
   ]);

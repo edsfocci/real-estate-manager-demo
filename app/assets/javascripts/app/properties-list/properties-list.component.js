@@ -7,10 +7,10 @@ angular.
     controller: PropertiesListController
   });
 
-PropertiesListController.$inject = ['propertiesList', 'propertiesForm',
+PropertiesListController.$inject = ['core', 'propertiesList', 'propertiesForm',
                                     'propertiesDetail'];
 
-function PropertiesListController(propertiesList, propertiesForm,
+function PropertiesListController(core, propertiesList, propertiesForm,
                                   propertiesDetail) {
   this.properties = propertiesList.getProperties();
 
@@ -19,12 +19,13 @@ function PropertiesListController(propertiesList, propertiesForm,
   }).length;
   propertiesDetail.setForSaleCount(forSaleCount);
 
+
   /* Event handlers */
   this.selectProperty = function(property) {
     propertiesForm.setProperty(property);
     propertiesDetail.setProperty(property);
 
     if ($('#dash-alert').css('display') === 'none')
-      window.appHelpers.triggerAlert('Property selected.');
+      core.triggerAlert('Property selected.');
   };
 }

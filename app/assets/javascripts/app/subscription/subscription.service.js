@@ -1,14 +1,13 @@
 'use strict';
 
-(function() {
-  angular.
-    module('subscription').
-    service('subscription', SubscriptionService);
+angular.
+  module('subscription').
+  service('subscription', SubscriptionService);
 
-  function SubscriptionService() {
-    this.getSubscription = getSubscription;
-    this.setSubscription = setSubscription;
-  }
+function SubscriptionService() {
+  this.getSubscription = getSubscription;
+  this.setSubscription = setSubscription;
+
 
   function getSubscription() {
     this.subscription = this.subscription || window.user.subscription;
@@ -23,4 +22,4 @@
     for (var key in updatedSubscription)
       this.subscription[key] = updatedSubscription[key];
   }
-})();
+}

@@ -1,17 +1,18 @@
 'use strict';
 
-(function() {
-  angular.
-    module('propertiesDetail').
-    service('propertiesDetail', PropertiesDetailService);
+angular.
+  module('propertiesDetail').
+  service('propertiesDetail', PropertiesDetailService);
 
-  function PropertiesDetailService() {
-    this.getProperty      = getProperty;
-    this.setProperty      = setProperty;
-    this.setSubscription  = setSubscription;
-    this.getForSaleCount  = getForSaleCount;
-    this.setForSaleCount  = setForSaleCount;
-  }
+function PropertiesDetailService() {
+  this.getProperty        = getProperty;
+  this.setProperty        = setProperty;
+  this.getSubscription    = getSubscription;
+  this.setSubscription    = setSubscription;
+  this.getForSaleCount    = getForSaleCount;
+  this.setForSaleCount    = setForSaleCount;
+  this.updateSellPopover  = updateSellPopover;
+
 
   function getProperty() {
     this.property = this.property || {};
@@ -28,7 +29,12 @@
 
     addDetails(this.property);
 
-    updateSellPopover(this);
+    this.updateSellPopover();
+  }
+
+  function getSubscription() {
+    this.subscription = this.subscription || {};
+    return this.subscription;
   }
 
   function setSubscription(subscription) {
@@ -38,7 +44,6 @@
 
     for (var key in subscription)
       this.subscription[key] = subscription[key];
-    window.wuwuw = this.subscription;
   }
 
   function getForSaleCount(forSaleCount) {
@@ -52,6 +57,38 @@
     else
       this.forSaleCount = { forSaleCount: forSaleCount };
   }
+
+  function updateSellPopover() {
+    var $sellFormSubmit = $('#sell-form input[type=submit]');
+    var sellBtnMessage  = '';
+
+    if ($('#property-info').is(':hidden'))
+      return;
+
+    if (this.property.missingFields.length)
+      sellBtnMessage  = '<li>Fill in all missing fields to sell this ' +
+                        'property.</li>';
+
+    if (this.forSaleCount.forSaleCount >= this.subscription.plan_number)
+      sellBtnMessage += '<li>Upgrade your subscription to sell more ' +
+                        'properties.</li>';
+
+    if (!this.property.for_sale && sellBtnMessage)
+      sellBtnMessage = '<ul>' + sellBtnMessage + '</ul>';
+
+    $sellFormSubmit.popover('destroy');
+
+    // Delay to tame popover('destroy')
+    setTimeout(function() {
+      if (!this.property.for_sale && sellBtnMessage)
+        $sellFormSubmit.popover({
+          'content':  sellBtnMessage,
+          'trigger':  'hover',
+          'html':     true
+        });
+    }, 500);
+  }
+
 
   /* Helper functions */
   function addDetails(property) {
@@ -77,34 +114,6 @@
     }
   }
 
-  function updateSellPopover(obj) {
-    var $sellFormSubmit = $('#sell-form input[type=submit]');
-    var sellBtnMessage  = '';
-
-    if (obj.property.missingFields.length)
-      sellBtnMessage  = '<li>Fill in all missing fields to sell this ' +
-                        'property.</li>';
-
-    if (obj.forSaleCount.forSaleCount >= obj.subscription.plan_number)
-      sellBtnMessage += '<li>Upgrade your subscription to sell more ' +
-                        'properties.</li>';
-
-    if (!obj.property.for_sale && sellBtnMessage)
-      sellBtnMessage = '<ul>' + sellBtnMessage + '</ul>';
-
-    $sellFormSubmit.popover('destroy');
-
-    // Delay to tame popover('destroy')
-    setTimeout(function() {
-      if (!obj.property.for_sale && sellBtnMessage)
-        $sellFormSubmit.popover({
-          'content':  sellBtnMessage,
-          'trigger':  'hover',
-          'html':     true
-        });
-    }, 500);
-  }
-
   function stringHumanReadable(string) {
     string = string.split('_');
     for (var i = 0; i < string.length; i++)
@@ -112,4 +121,4 @@
 
     return string.join(' ');
   }
-})();
+}

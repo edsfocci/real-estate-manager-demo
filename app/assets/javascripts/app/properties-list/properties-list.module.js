@@ -2,6 +2,7 @@
 
 angular.
   module('propertiesList', [
+    'core',
     'propertiesForm',
     'propertiesDetail'
   ]);

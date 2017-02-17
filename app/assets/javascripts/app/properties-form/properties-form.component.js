@@ -7,11 +7,11 @@ angular.
     controller: PropertiesFormController
   });
 
-PropertiesFormController.$inject = ['$scope', '$http', 'propertiesForm',
-                                    'propertiesDetail', 'propertiesList'];
+PropertiesFormController.$inject = ['$scope', '$http', 'core', 'propertiesForm',
+                                    'propertiesList', 'propertiesDetail'];
 
-function PropertiesFormController($scope, $http, propertiesForm,
-                                  propertiesDetail, propertiesList) {
+function PropertiesFormController($scope, $http, core, propertiesForm,
+                                  propertiesList, propertiesDetail) {
   $scope.states = [
     'Dallas',
     'Austin',
@@ -19,6 +19,7 @@ function PropertiesFormController($scope, $http, propertiesForm,
   ];
 
   this.property = propertiesForm.getProperty();
+
 
   /* Event handlers */
   this.submitForm = function() {
@@ -37,34 +38,20 @@ function PropertiesFormController($scope, $http, propertiesForm,
       promise = $http.post('/properties/', propertyData);
 
     promise.then(function(response) {
-      var submittedProperty = setPropertyState(response.data);
+      var submittedProperty = core.setPropertyState(response.data);
 
       propertiesForm.setProperty(submittedProperty);
       propertiesDetail.setProperty(submittedProperty);
       propertiesList.updateProperty(submittedProperty);
 
       if (propertyId)
-        window.appHelpers.triggerAlert('Property updated.');
+        core.triggerAlert('Property updated.');
       else
-        window.appHelpers.triggerAlert('Property added.');
+        core.triggerAlert('Property added.');
     });
   };
 
   this.clearForm = function() {
     propertiesForm.setProperty({});
   };
-}
-
-/* Helper function */
-function setPropertyState(property) {
-  if ('bedrooms' in property)
-    property.state = 'Dallas';
-
-  if ('kitchen' in property)
-    property.state = 'Austin';
-
-  if ('pool' in property)
-    property.state = 'Houston';
-
-  return property;
 }

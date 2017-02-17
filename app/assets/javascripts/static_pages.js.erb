@@ -1,22 +1,9 @@
 'use strict';
 
 $(function() {
-  var $alertMessage = $('#dash-alert');
-  var $planNumber   = $('#plan_number');
+  var $planNumber = $('#plan_number');
 
   window.user ? showDashboard() : showFrontPage();
-
-  window.appHelpers = {
-    triggerAlert: function(message) {
-      $alertMessage.html(message);
-
-      $alertMessage.fadeIn();
-
-      setTimeout(function() {
-        $alertMessage.fadeOut();
-      }, 3000);
-    }
-  };
 
   /* Bootstrap popovers */
   $planNumber.popover({

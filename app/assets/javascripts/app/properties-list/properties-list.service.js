@@ -1,19 +1,20 @@
 'use strict';
 
-(function() {
-  angular.
-    module('propertiesList').
-    service('propertiesList', PropertiesListService);
+angular.
+  module('propertiesList').
+  service('propertiesList', PropertiesListService);
 
-  function PropertiesListService() {
-    this.getProperties = getProperties;
-    this.addProperty = addProperty;
-    this.updateProperty = updateProperty;
-  }
+PropertiesListService.$inject = ['core'];
+
+function PropertiesListService(core) {
+  this.getProperties  = getProperties;
+  this.addProperty    = addProperty;
+  this.updateProperty = updateProperty;
+
 
   function getProperties() {
-    this.properties = this.properties ||
-                      window.user.subscription.properties.map(setPropertyState);
+    this.properties = this.properties ||  window.user.subscription.properties
+                                            .map(core.setPropertyState);
 
     return this.properties;
   }
@@ -23,7 +24,6 @@
   }
 
   function updateProperty(updatedProperty) {
-
     var oldProperty = this.properties.filter(function(property) {
       return property._id.$oid === updatedProperty._id.$oid;
     })[0];
@@ -42,18 +42,4 @@
     else
       this.addProperty(updatedProperty);
   }
-
-  /* Helper function */
-  function setPropertyState(property) {
-    if ('bedrooms' in property)
-      property.state = 'Dallas';
-
-    if ('kitchen' in property)
-      property.state = 'Austin';
-
-    if ('pool' in property)
-      property.state = 'Houston';
-
-    return property;
-  }
-})();
+}
